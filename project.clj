@@ -1,8 +1,8 @@
 (defproject generic-api "0.0.1-SNAPSHOT"
   :description "FIXME: write description"
   :url "http://example.com/FIXME"
-  :license {:name "GNU General Public License v3"
-            :url "https://www.gnu.org/licenses/gpl-3.0.en.html"}
+  :license {:name "Eclipse Public License"
+            :url "http://www.eclipse.org/legal/epl-v10.html"}
   :dependencies [[org.clojure/clojure "1.8.0"]
                  [io.pedestal/pedestal.service "0.5.3"]
 

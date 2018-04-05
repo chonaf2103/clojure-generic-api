@@ -9,8 +9,8 @@ base: cloudius/osv-openjdk8
 #
 # The command line passed to OSv to start up the application.
 #
-#cmdline: /java.so -cp /copsa-api/app.jar clojure.main -m copsa-api
-cmdline: /java.so -jar /copsa-api/app.jar
+#cmdline: /java.so -cp /generic-api/app.jar clojure.main -m generic-api
+cmdline: /java.so -jar /generic-api/app.jar
 
 #
 # The command to use to build the application.

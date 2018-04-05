@@ -3,36 +3,44 @@
             [io.pedestal.http.route :as route]
             [io.pedestal.http.body-params :as body-params]
             [ring.util.response :as ring-resp]
-            [clojure.string :as str]
+            [clojure.java.io :as io]
             [clojure.set :refer [union]]
-            [clojure.java.io :as io]))
+            [clojure.string :as str]))
 
 (def controllers-source "./src/generic_api/controllers/")
 
 (defn load-routes []
   (let [files (file-seq (io/file controllers-source))]
     (reduce union (for [file files]
-              (if (.isFile file)
-                (let [file-path (str controllers-source (.getName file))]
-                  (let [namespace (str "generic-api.controllers." (subs file-path (+ 1 (str/last-index-of file-path "/")) (str/last-index-of file-path ".")))]
-                    (require (symbol namespace))
-                    (let [space (find-ns (symbol namespace))]
-                      (let [routes (ns-resolve space 'routes)]
-                        (routes)))))
-                #{})))))
+                    (if (.isFile file)
+                      (let [file-path (str controllers-source (.getName file))]
+                        (let [namespace (str "generic-api.controllers." (subs file-path (+ 1 (str/last-index-of file-path "/")) (str/last-index-of file-path ".")))]
+                          (require (symbol namespace))
+                          (let [space (find-ns (symbol namespace))]
+                            (let [routes (ns-resolve space 'routes)]
+                              (routes)))))
+                      #{})))))
 
 (def routes (load-routes))
 
-;; Defines "/" and "/about" routes with their associated :get handlers.
-;; The interceptors defined after the verb map (e.g., {:get home-page}
-;; apply to / and its children (/about).
-;(def common-interceptors [(body-params/body-params) http/json-body])
-
-;; Tabular routes
-;(def routes #{["/api" :get (conj common-interceptors `api-entry)]
-;              ["/api" :post (conj common-interceptors `api-entry)]
-;              ["/api" :put (conj common-interceptors `api-entry)]
-;              ["/api" :delete (conj common-interceptors `api-entry)]})
+;(defn about-page
+;  [request]
+;  (ring-resp/response (format "Clojure %s - served from %s"
+;                              (clojure-version)
+;                              (route/url-for ::about-page))))
+;
+;(defn home-page
+;  [request]
+;  (ring-resp/response "Hello World!"))
+;
+; Defines "/" and "/about" routes with their associated :get handlers.
+; The interceptors defined after the verb map (e.g., {:get home-page}
+; apply to / and its children (/about).
+;(def common-interceptors [(body-params/body-params) http/html-body])
+;
+; Tabular routes
+;(def routes #{["/" :get (conj common-interceptors `home-page)]
+;              ["/about" :get (conj common-interceptors `about-page)]})
 
 ;; Map-based routes
 ;(def routes `{"/" {:interceptors [(body-params/body-params) http/html-body]
@@ -46,7 +54,7 @@
 ;      ["/about" {:get about-page}]]]])
 
 
-;; Consumed by copsa-api.server/create-server
+;; Consumed by generic-api.server/create-server
 ;; See http/default-interceptors for additional options you can configure
 (def service {:env :prod
               ;; You can bring your own non-default interceptors. Make

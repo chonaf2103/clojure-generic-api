@@ -1,5 +1,5 @@
 FROM java:8-alpine
-MAINTAINER Jonathan Franco <chonaf2103@gmail.com>
+MAINTAINER Your Name <you@example.com>
 
 ADD target/generic-api-0.0.1-SNAPSHOT-standalone.jar /generic-api/app.jar
 

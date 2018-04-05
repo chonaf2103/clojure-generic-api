@@ -1,4 +1,4 @@
-# copsa-api
+# generic-api
 
 FIXME
 
@@ -6,9 +6,9 @@ FIXME
 
 1. Start the application: `lein run`
 2. Go to [localhost:8080](http://localhost:8080/) to see: `Hello World!`
-3. Read your app's source code at src/copsa_api/service.clj. Explore the docs of functions
+3. Read your app's source code at src/generic_api/service.clj. Explore the docs of functions
    that define routes and responses.
-4. Run your app's tests with `lein test`. Read the tests at test/copsa_api/service_test.clj.
+4. Run your app's tests with `lein test`. Read the tests at test/generic_api/service_test.clj.
 5. Learn more! See the [Links section below](#links).
 
 
@@ -28,8 +28,8 @@ To learn more about configuring Logback, read its [documentation](http://logback
 ### [Docker](https://www.docker.com/) container support
 
 1. Build an uberjar of your service: `lein uberjar`
-2. Build a Docker image: `sudo docker build -t copsa-api .`
-3. Run your Docker image: `docker run -p 8080:8080 copsa-api`
+2. Build a Docker image: `sudo docker build -t generic-api .`
+3. Run your Docker image: `docker run -p 8080:8080 generic-api`
 
 ### [OSv](http://osv.io/) unikernel support with [Capstan](http://osv.io/capstan/)
 
@@ -37,7 +37,7 @@ To learn more about configuring Logback, read its [documentation](http://logback
 
 Once the image it built, it's cached.  To delete the image and build a new one:
 
-1. `capstan rmi copsa-api; capstan build`
+1. `capstan rmi generic-api; capstan build`
 
 
 ## Links
