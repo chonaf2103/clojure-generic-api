@@ -1,8 +1,5 @@
 (ns generic-api.service
   (:require [io.pedestal.http :as http]
-            [io.pedestal.http.route :as route]
-            [io.pedestal.http.body-params :as body-params]
-            [ring.util.response :as ring-resp]
             [clojure.java.io :as io]
             [clojure.set :refer [union]]
             [clojure.string :as str]))
